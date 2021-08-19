@@ -38,22 +38,17 @@ function update() {
 }
 
 function checkEdges(){
-  if(x > canvas.width || x2 > canvas.width){
-    dx = -dx;
-    dx2 = -dx2;
-  }
-  if(y > canvas.height || y2 > canvas.height){
-    dy = -dy;
-    dy2 = -dy2;
-  }
-  if(y < 0 || y2 < 0){
-    dy = -dy;
-    dy2 = -dy2;
-  }
-  if(x < 0 || x2 < 0){
-    dx = -dx;
-    dx2 = -dx2;
-  }
+  if(x > canvas.width){dx = -dx}
+  if(x2 > canvas.width){dx2 = -dx2}
+
+  if(y > canvas.height){dy = -dy}
+  if(y2 > canvas.height){dy2 = -dy2}
+
+  if(y < 0){dy = -dy}
+  if(y2 < 0){dy2 = -dy2}
+
+  if(x < 0){dx = -dx}
+  if(x2 < 0){dx2 = -dx2}
 }
 
 // render a circle
