@@ -6,24 +6,25 @@ function init(){
     canvas = document.getElementById("cnv");
     context = canvas.getContext("2d");
 
-    for(let i=0; i < 3; i++){
+    for(let i=0; i < 9; i++){
       var ball = {};
-      ball.x = Math.random() * canvas.width;
-      ball.y = Math.random() * canvas.height;
-      ball.dx = Math.random() * canvas.width;
-      ball.dy = Math.random() * canvas.height;
+      ball.x = 150;
+      ball.y = 200;
+      ball.dx = 3;
+      ball.dy = 3;
       balls.push(ball);
     }
-    draw();
     animate();
 
 }
 
 
-function animate() {
+function animate(){
     context.clearRect(0,0,canvas.width,canvas.height);
+    draw();
     update();
-    requestAnimationFrame(animate); // next cycle
+    checkEdges()
+    requestAnimationFrame(animate);
 }
 
 function update(){
@@ -34,12 +35,20 @@ function update(){
 }
 function draw(){
   let radius = 15;
-  for(var i=0; i<balls[i].length; i++){
+  for(var i=0; i < balls.length; i++){
     context.beginPath();
-    context.arc(ball[i].x, ball[i].y, radius, 0, 2 * Math.PI);
+    context.arc(balls[i].x, balls[i].y, radius, 0, 2 * Math.PI);
     context.strokeStyle = "black";
     context.fillStyle = "red";
     context.fill();
     context.stroke();
+  }
+}
+function checkEdges(){
+  for(let i=0; i < balls.length; i++){
+    if(balls[i].x > canvas.width){balls[i].dx = balls[i].dx*-1}
+    if(balls[i].x < 0){balls[i].dx = balls[i].dx*-1}
+    if(balls[i].y > canvas.height){balls[i].dy = balls[i].dy*-1}
+    if(balls[i].y < 0){balls[i].dy = balls[i].dy*-1}
   }
 }
