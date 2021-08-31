@@ -84,35 +84,32 @@ JSVector.prototype.limit = function(lim){
 
 // Get the distance between this vector and another one
 JSVector.prototype.distance = function(v2){
-  return Math.sqrt(Math.pow(this.x-v2.x,2),Math.pow(this.y-v2.y,2));
+  
 }
 
 // Get square of the distance between this vector and another one
 JSVector.prototype.distanceSquared = function(v2){
-  return Math.pow(this.x-v2.x,2),Math.pow(this.y-v2.y,2)
+
 }
 
 // Rotate this vector by some number of radians
 // using the rotation matrix |  cos   -sin  |
 //                           |  sin   +cos  |
 JSVector.prototype.rotate = function(angle) {
-  let tempX = Math.cos(angle)*this.x-Math.sin(angle)*this.y;
-  let tempY = Math.sin(angle)*this.x+Math.cos(angle)*this.y;
-  this.x = tempX;
-  this.y = tempY;
+
 }
 
 // Get the angle between this vector and another one
 JSVector.prototype.angleBetween = function(v2){
-  return this.getDirection()-v2.getDirection();
+
 }
 
 // Make a copy of this vector
 JSVector.prototype.copy = function(){
-  return new JSVector(this.x,this.y);
+
 }
 
 // Override inherited toString() to describe this instance
 JSVector.prototype.toString = function() {
-  return "x: "+this.x+" y: "+this.y;
+
 }
