@@ -3,6 +3,7 @@ function Ball(loc,vel,acc,rad,clr){
   this.loc = loc;
   this.vel = vel;
   this.rad = rad;
+  this.acc = acc;
   this.clr = clr;
 }
 

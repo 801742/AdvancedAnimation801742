@@ -33,41 +33,24 @@ function loadBalls(n){
     repulser = new Ball(loc,vel,acc,rad,clr2);
 }
 function runBalls(){
-for(let i=0; i < balls.length; i++){
+  for(let i=0; i < balls.length; i++){
   balls[i].run();
+}
   attractor.run();
   repulser.run();
-}
 }
 function animate(){
     context.clearRect(0,0,canvas.width,canvas.height);
     runBalls();
-    attractRepel();
+//    attractRepel();
     requestAnimationFrame(animate);
 }
-function attractRepel(){
-  for(let i=0; i<balls.length; i++){
-    if(attractor.loc.sub(balls[i])<150){
-      balls[i].acc *= 2;
-      balls[i].setDirection(attractor.getDirection());
-    }else if(attractor.loc.sub(balls[i])<250){
-      balls[i].acc *= 2;
-      balls[i].setDirection(attractor.getDirection()*180);
-    }
-  }
-}
-//function animate(){
-//    context.clearRect(0,0,canvas.width,canvas.height);
-//    runBalls();
-//    for(let i=0; i<balls.length; i++){
-//      let vec = new JSVector();
-//      if(vec.subGetNew(balls[i].loc , attractor.loc).getMagnitude()<150){
-//        balls[i].acc *= 2;
-//        balls[i].setDirection(attractor.getDirection());
-//      }else if(vec.subGetNew(balls[i].loc , attractor.loc).getMagnitude()<200){
-//        balls[i].acc *= 2;
-//        balls[i].setDirection(attractor.getDirection()*180);
-//      }
-//    }
-//    requestAnimationFrame(animate);
-//}
+// function attractRepel(){
+//   for(let i=0; i<balls.length; i++){
+//     if(JSVector.subGetNew(balls[i].loc, attractor.loc)<150){
+//       balls[i].setDirection(attractor.getDirection());
+//     }else if(JSVector.subGetNew(balls[i].loc, repulser.loc)<250){
+//       balls[i].setDirection(repulser.getDirection()*180);
+//     }
+//   }
+// }
