@@ -17,21 +17,27 @@ Ball.prototype.draw = function(){
 }
 
 Ball.prototype.update = function(){
-  this.vel += this.acc;
-  this.loc += this.vel;
+  this.vel.add(this.acc);
+  this.loc.add(this.vel);
 }
 
-//Ball.prototype.checkEdges = function(){
-//  for(let i=0; i<balls.length; i++){
-//    if(this.loc.x > canvas.width){this.vel = this.vel*-1}
-//    if(this.loc.x < 0){this.vel = this.vel*-1}
-//    if(this.loc.y > canvas.height){this.vel = this.vel*-1}
-//    if(this.loc.y < 0){this.vel = this.vel*-1}
-//  }
-//}
+Ball.prototype.checkEdges = function(){
+if(this.loc.x<this.rad){
+  this.vel.x = Math.abs(this.vel.x);
+}
+else if(this.loc.x>canvas.width-this.rad){
+  this.vel.x =-1*Math.abs(this.vel.x);
+}
+if(this.loc.y<this.rad){
+  this.vel.y = Math.abs(this.vel.y);
+}
+else if(this.loc.y>canvas.height-this.rad){
+  this.vel.y =-1*Math.abs(this.vel.y);
+}
+}
 
 Ball.prototype.run = function(){
   this.draw();
   this.update();
-//  this.checkEdges();
+  this.checkEdges();
 }
