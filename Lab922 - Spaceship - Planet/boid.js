@@ -16,7 +16,9 @@ Boid.prototype.draw = function(){
     context.fillStyle = this.clr;
     context.save();
     context.translate(this.loc.x,this.loc.y);
+
     context.rotate(this.vel.getDirection());
+    
     context.moveTo(this.rad,0);
     context.lineTo(-this.rad,-this.rad/2);
     context.lineTo(-this.rad,this.rad/2);
