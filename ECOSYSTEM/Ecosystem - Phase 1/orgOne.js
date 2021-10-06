@@ -8,7 +8,7 @@ function OrgOne(loc, vel, rad, clr, context){
 
   this.spikes = [];
   this.angV = 0;
-  let num = Math.floor(Math.random()*7)+2;
+  let num = Math.floor(Math.random()*9)+6;
   for(let i=0; i < num; i++){
     let rad = 50
     let clr = "red";

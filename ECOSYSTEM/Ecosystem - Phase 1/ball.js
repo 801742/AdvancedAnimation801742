@@ -9,10 +9,10 @@ function Ball(loc, vel, rad, clr, context){
 
 Ball.prototype.draw = function(){
   this.context.beginPath();
-  this.context.arc(0, 0, this.rad, 0, 2*Math.PI);
+  this.context.arc(this.loc.x, this.loc.y, this.rad, 0, 2*Math.PI);
   this.context.fillStyle = this.clr;
   this.context.fill();
-
+  this.context.closePath();
 }
 
 Ball.prototype.update = function(){
