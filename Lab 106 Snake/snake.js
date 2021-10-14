@@ -7,8 +7,7 @@ function Snake(loc, vel, rad, clr, num){
   this.clr = clr;
   this.num = num;
 
-  //let length = Math.floor(Math.random() * 5+2);
-  this.length = 9;
+  this.length = Math.floor(Math.random() * 15+6);
   this.segments = [];
   for(let i = 0; i < this.length; i++){
 
