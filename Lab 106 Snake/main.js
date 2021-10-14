@@ -7,7 +7,7 @@ function init(){
     canvas = document.getElementById("cnv");
     context = canvas.getContext("2d");
 
-    load(1);
+    load(8);
     animate();
 
 }
@@ -15,7 +15,7 @@ function load(n){
   for(let i=0; i < n; i++){
 
     let loc = new JSVector(Math.random()*canvas.width, Math.random()*canvas.width);
-    let vel = new JSVector(1,1);
+    let vel = new JSVector(Math.random()*5-3,Math.random()*3-5);
     let rad = 10
     let clr = "blue";
     let num = i;

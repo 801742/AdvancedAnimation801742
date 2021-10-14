@@ -20,9 +20,10 @@ Segment.prototype.draw = function(){
 }
 
 Segment.prototype.follow = function(segAhead){
-  //let dist = JSVector.subGetNew(segAhead.loc,this.loc);
-  //dist.setMagnitude(5);
-  //this.loc = JSVector.subGetNew(segAhead.loc, dist);
+  let dist = JSVector.subGetNew(segAhead.loc,this.loc);
+  dist.setMagnitude(15);
+  this.loc = JSVector.subGetNew(segAhead.loc, dist);
+  this.draw();
   }
 
 Segment.prototype.update = function(){
@@ -31,8 +32,16 @@ Segment.prototype.update = function(){
   }
 }
 
+Segment.prototype.checkEdges = function(){
+  if(this.num == 0){
+    if(this.loc.x > canvas.width) this.vel.x = -this.vel.x;
+    if(this.loc.y > canvas.height) this.vel.y = -this.vel.y;
+    if(this.loc.x < 0) this.vel.x = -this.vel.x;
+    if(this.loc.y < 0) this.vel.y = -this.vel.y;
+  }
+}
+
 Segment.prototype.run = function(){
   this.update();
-  this.follow();
-  this.draw();
+  this.checkEdges();
 }
