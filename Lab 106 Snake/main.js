@@ -23,8 +23,8 @@ function load(n){
   }
 }
 function run(){
-  for(let i=0; i < segments.length; i++){
-    segments[i].run();
+  for(let i=0; i < snakes.length; i++){
+    snakes[i].run();
   }
 }
 function animate(){

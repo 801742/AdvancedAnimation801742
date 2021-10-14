@@ -1,10 +1,10 @@
 
-function Segment(loc, clr, rad, num, length){
+function Segment(loc, vel, clr, rad, num){
   this.loc = loc;
+  this.vel = vel;
   this.clr = clr;
   this.rad = rad;
   this.num = num;
-  this.length = length;
 }
 
 
@@ -19,18 +19,20 @@ Segment.prototype.draw = function(){
 
 }
 
-Segment.prototype.follow = function(){
-  if(this.num == 0){
-    this.loc = new JSVector(snakes[this.num].loc.x, snakes[this.num].loc.y);
-
-  }else{
-    let v2 = JSVector.subGetNew(this.loc, this.segments[this.num-1].loc);
-    v2.setMagnitude(length);
-    this.loc = JSVector.addGetNew(this.segments[this.num-1].loc, v2);
-      }
+Segment.prototype.follow = function(segAhead){
+  //let dist = JSVector.subGetNew(segAhead.loc,this.loc);
+  //dist.setMagnitude(5);
+  //this.loc = JSVector.subGetNew(segAhead.loc, dist);
   }
 
+Segment.prototype.update = function(){
+  if(this.num == 0){
+    this.loc.add(this.vel);
+  }
+}
+
 Segment.prototype.run = function(){
+  this.update();
   this.follow();
   this.draw();
 }
