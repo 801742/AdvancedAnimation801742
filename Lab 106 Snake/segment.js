@@ -20,10 +20,12 @@ Segment.prototype.draw = function(){
 }
 
 Segment.prototype.follow = function(segAhead){
+
   let dist = JSVector.subGetNew(segAhead.loc,this.loc);
-  dist.setMagnitude(15);
+  dist.setMagnitude(25);
   this.loc = JSVector.subGetNew(segAhead.loc, dist);
   this.draw();
+
   }
 
 Segment.prototype.update = function(){
