@@ -1,8 +1,8 @@
 
-function Particle(loc, vel, acc){
-  this.loc = loc;
-  this.vel = vel;
-  this.acc = acc;
+function Particle(x,y){
+  this.loc = new JSVector(x, y); //initialize loc at emitter loc
+  this.vel = new JSVector(Math.random()*2-1, Math.random()*2-2);
+  this.acc = new JSVector(0, 0.05);
   this.lifeSpan = 200;
 }
 
@@ -13,7 +13,7 @@ Particle.prototype.draw = function(){
   context.beginPath();
   context.arc(this.loc.x, this.loc.y, 15, Math.PI*2, 0, false);
   context.stroke();
-  context.fillStyle = new Color(Math.random()*255,Math.random()*255,Math.random()*255,this.lifeSpan); 
+  context.fillStyle = new Color(Math.random()*255,Math.random()*255,Math.random()*255,this.lifeSpan);
   context.fill();
 
 }
