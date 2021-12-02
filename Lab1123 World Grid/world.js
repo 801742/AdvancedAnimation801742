@@ -1,3 +1,5 @@
+document.addEventListener('click', occupied);
+
 function World(){
 
   this.world = {
@@ -76,7 +78,10 @@ World.prototype.draw = function(){
   contextMini.moveTo(this.world.left, 0);
   contextMini.lineTo(this.world.width, 0);
   contextMini.stroke();
+  //
 
   contextMini.restore();
-
+  function occupied(){
+    
+  }
 }
