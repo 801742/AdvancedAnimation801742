@@ -33,7 +33,7 @@ class Actor {
 
             this.cell++;
             this.currentCell = this.nextCell;
-            this.nextCell = game.path[this.pathIndex+this.cell];
+            this.nextCell = game.path[this.pathIndex + this.cell];
             this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2, this.nextCell.loc.y + this.nextCell.height/2);
             this.vel = JSVector.subGetNew(this.target, this.loc);
 

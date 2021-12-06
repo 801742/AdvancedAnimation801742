@@ -2,18 +2,18 @@
 function World(){
 
   this.world = {
-    height: 2000,
-    width: 3000,
-    top: -1000,
-    left: -1500
+    height: 1000,
+    width: 1500,
+    top: -500,
+    left: -700
   }
 
   this.scaleWidth = canvasMini.width/this.world.width;
   this.scaleHeight = canvasMini.height/this.world.height;
   this.canvasLoc = new JSVector();
 
-  this.Cols = Math.floor(Math.random()*100);
-  this.Rows = Math.floor(Math.random()*100);
+  this.Cols = 50;
+  this.Rows = 50;
 
   this.boxWidth = this.world.width/this.Cols;
   this.boxHeight = this.world.height/this.Rows;
@@ -22,7 +22,11 @@ function World(){
   for(let r = 0; r < this.Rows; r++){
     this.boxs[r] = [];
     for(let c = 0; c < this.Cols; c++){
-      this.boxs[r][c] = new JSVector(c*this.boxWidth+this.world.left, r*this.boxHeight+this.world.top);
+      if(Math.random()*10 < 3){
+      this.boxs[r][c] = new Box(this.boxWidth, this.boxHeight, r, c, this, true);
+    }else{
+      this.boxs[r][c] = new Box(this.boxWidth, this.boxHeight, r, c, this, false);
+    }
     }
   }
 }
@@ -48,9 +52,7 @@ World.prototype.draw = function(){
 //Drawing Boxs
   for(let r = 0; r < this.Rows; r++){
     for(let c = 0; c < this.Cols; c++){
-      context.beginPath();
-      context.rect(this.boxs[r][c].x, this.boxs[r][c].y, this.boxWidth, this.boxHeight);
-      context.stroke();
+      this.boxs[r][c].run();
     }
   }
 
@@ -80,4 +82,7 @@ World.prototype.draw = function(){
   //
 
   contextMini.restore();
+  function occupied(){
+
+  }
 }
