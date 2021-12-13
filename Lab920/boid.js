@@ -1,49 +1,31 @@
 
-function Boid(loc,vel){
+function Ship(loc, vel, rad, clr) {
   this.loc = loc;
   this.vel = vel;
-  this.clr = "blue";
+  this.clr = clr;
+  this.rad = rad;
 }
 
+  Ship.prototype.update = function(){
+    this.loc.add(this.vel);
+  }
 
-Boid.prototype.draw = function(){
-  let ctx = context;
+  Ship.prototype.checkEdges = function(){
+    if(this.loc.x > canvas.width || this.loc.x < 0) this.vel.x = -this.vel.x;
+    if(this.loc.y > canvas.height || this.loc.y < 0) this.vel.y =-this.vel.y;
+  }
 
-  ctx.save();
-  ctx.beginPath()
-  ctx.translate(this.loc.x,this.loc.y);
-  ctx.rotate(this.vel.getDirection());
-  ctx.moveTo(this.loc.x-15, this.loc.y-0.5*15);
-  ctx.lineTo(this.loc.x+15, this.loc.y);
-  ctx.lineTo(this.loc.x-15, this.loc.y+0.5*15);
-  ctx.closePath();
-  ctx.fillStyle = this.clr;
-  ctx.fill();
-  ctx.restore();
-}
-
-Boid.prototype.update = function(){
-  this.loc.add(this.vel);
-
-}
-
-Boid.prototype.checkEdges = function(){
-if(this.loc.x<15){
-  this.vel.x = Math.abs(this.vel.x);
-}
-else if(this.loc.x>canvas.width-15){
-  this.vel.x =-1*Math.abs(this.vel.x);
-}
-if(this.loc.y<15){
-  this.vel.y = Math.abs(this.vel.y);
-}
-else if(this.loc.y>canvas.height-15){
-  this.vel.y =-1*Math.abs(this.vel.y);
-}
-}
-
-Boid.prototype.run = function(){
-  this.draw();
-  this.update();
-  this.checkEdges();
-}
+  Ship.prototype.draw = function(){
+    context.beginPath();
+    context.strokeStyle = this.clr;
+    context.save();
+    context.translate(this.loc.x,this.loc.y);
+    context.rotate(this.vel.getDirection());
+    context.moveTo(this.rad,0);
+    context.lineTo(-this.rad,-this.rad/2);
+    context.lineTo(-this.rad,this.rad/2);
+    context.closePath();
+    context.closePath();
+    context.stroke();
+    context.restore();
+  }

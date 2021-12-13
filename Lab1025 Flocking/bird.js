@@ -1,35 +1,53 @@
-
-function Bird(loc){
-  this.loc = loc;
-  this.vel = new JSVector(Math.random()*2-1, Math.random()*2-2);
-  this.clr = "blue";
+function Boid(pos,vel,length,color,worldScale,ctxArr){
+  this.pos = pos;
+  this.vel = vel;
+  this.length = length;
+  this.color = color;
+  this.worldScale = worldScale;
+  this.ctxArr = ctxArr;
 }
 
-
-Bird.prototype.draw = function(){
-
-  context.strokeStyle = this.clr;
-  context.beginPath();
-  context.arc(this.loc.x, this.loc.y, 15, Math.PI*2, 0, false);
-  context.stroke();
-  context.fillStyle = this.clr;
-  context.fill();
-
-}
-Bird.prototype.checkEdges = function(){
-    if(this.loc.x > canvas.width) this.vel.x = -this.vel.x;
-    if(this.loc.y > canvas.height) this.vel.y = -this.vel.y;
-    if(this.loc.x < 0) this.vel.x = -this.vel.x;
-    if(this.loc.y < 0) this.vel.y = -this.vel.y;
+Boid.prototype.interact = function(other,strength,sign){
+  let force = JSVector.subGetNew(other.pos,this.pos);
+  force.setMagnitude(strength);
+  force.multiply(sign);
+  let mag = this.vel.getMagnitude();
+  this.vel.add(force);
+  this.vel.setMagnitude(mag);
 }
 
-
-Bird.prototype.update = function(){
-  this.loc.add(this.vel);
-}
-
-Bird.prototype.run = function(){
-  this.update();
-  this.draw();
+Boid.prototype.update = function(){
+  this.pos.add(this.vel);
   this.checkEdges();
+  this.draw();
+}
+
+Boid.prototype.checkEdges = function(){
+  if(this.pos.x<-this.worldScale.x/2){
+    this.pos.x = this.worldScale.x/2;
+  }
+  if(this.pos.x>this.worldScale.x/2){
+    this.pos.x = -this.worldScale.x/2;
+  }
+  if(this.pos.y<-this.worldScale.y/2){
+    this.pos.y = this.worldScale.y/2;
+  }
+  if(this.pos.y>this.worldScale.y/2){
+    this.pos.y = -this.worldScale.y/2;
+  }
+}
+
+Boid.prototype.draw = function(){
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle =  this.color.toString();
+    ctx.save();
+    ctx.translate(this.pos.x,this.pos.y);
+    ctx.rotate(this.vel.getDirection());
+    ctx.moveTo(this.length,0);
+    ctx.lineTo(-this.length,-this.length/2);
+    ctx.lineTo(-this.length,this.length/2);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.restore();
 }
