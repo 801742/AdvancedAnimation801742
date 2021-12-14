@@ -34,7 +34,7 @@ function World(){
       let vel = new JSVector(Math.random()*2-1, Math.random()*2-1);
       let rad = 20;
       let clr = "white";
-      orgOnes.push(new OrgOne(loc, vel, rad, clr));
+      orgOnes.push(new OrgOne(loc, vel, rad, clr,i));
     }
     for(let i = 0; i < 20; i++){
       let loc = new JSVector(Math.random()*2000-1000, Math.random()*3000-1500);
@@ -53,6 +53,9 @@ function World(){
 }
 World.prototype.draw = function(){
 
+
+  context.save();
+  context.translate(this.canvasLoc.x*(-1), this.canvasLoc.y*(-1));
   for(let i=0; i < snakes.length; i++){
     snakes[i].run();
   }
@@ -66,9 +69,6 @@ World.prototype.draw = function(){
     ships[i].run();
   }
 
-
-  context.save();
-  context.translate(this.canvasLoc.x*(-1), this.canvasLoc.y*(-1));
 
   context.beginPath();
   context.moveTo(0,this.world.top);

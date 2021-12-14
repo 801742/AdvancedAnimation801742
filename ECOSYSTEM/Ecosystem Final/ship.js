@@ -4,9 +4,13 @@ function Ship(loc, vel, rad, clr) {
   this.vel = vel;
   this.clr = clr;
   this.rad = rad;
+  this.acc = new JSVector(0, 0);
 }
 
   Ship.prototype.update = function(){
+    let currentV = this.vel.getMagnitude();
+    this.vel.add(this.acc);
+    this.vel.setMagnitude(currentV);
     this.loc.add(this.vel);
   }
 
@@ -59,10 +63,15 @@ function Ship(loc, vel, rad, clr) {
     this.attraction();
   }
   Ship.prototype.attraction = function(){
-    for(i=0; i < snakes.length; i++){
-      let d = JSVector.subGetNew(this.loc, snakes[i].segments[0].loc);
-      if(d < 20){
-        this.vel = -this.vel;
+    let nearPlanet = false;
+    for(i=0; i < balls.length; i++){
+      let d = JSVector.subGetNew(this.loc, balls[i].loc).getMagnitude();
+      if(d < 200){
+        this.acc = JSVector.subGetNew(balls[i].loc, this.loc).setMagnitude(0.5);
+        nearPlanet = true;
       }
+    }
+    if(!nearPlanet){
+      this.acc = new JSVector(0, 0);
     }
   }

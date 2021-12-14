@@ -5,6 +5,7 @@ function Segment(loc, vel, clr, rad, num){
   this.clr = clr;
   this.rad = rad;
   this.num = num;
+  this.acc = new JSVector(0,0);
 }
 
 
@@ -43,6 +44,9 @@ Segment.prototype.follow = function(segAhead){
 
 Segment.prototype.update = function(){
   if(this.num == 0){
+    let currentV = this.vel.getMagnitude();
+    this.vel.add(this.acc);
+    this.vel.setMagnitude(currentV);
     this.loc.add(this.vel);
   }
 }
@@ -59,4 +63,18 @@ Segment.prototype.update = function(){
 Segment.prototype.run = function(){
   this.update();
   this.checkEdges();
+  this.repulsion();
 }
+Segment.prototype.repulsion = function(){
+  let nearOrgOne = false;
+  for(let i=0; i < orgOnes.length; i++){
+    let d = JSVector.subGetNew(this.loc, orgOnes[i].loc).getMagnitude();
+    if(d < 120){
+      this.acc = JSVector.subGetNew(this.loc, orgOnes[i].loc).setMagnitude(0.5);
+      nearOrgOne = true;
+    }
+  }
+  if(!nearOrgOne){
+    this.acc = new JSVector(0, 0);
+  }
+  }

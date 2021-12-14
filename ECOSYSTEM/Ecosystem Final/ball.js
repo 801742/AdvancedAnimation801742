@@ -35,9 +35,10 @@ Ball.prototype.update = function(){
       this.particles.splice(i, 1);
     }
   }
+
   for(let i=0; i < ships.length; i++){
-  let d = this.loc.distance(ships[i].loc);
-    if(d < 90){//new loc
+    let d = JSVector.subGetNew(this.loc, ships[i].loc).getMagnitude();
+    if(d < this.rad){
       this.loc = new JSVector(Math.random()*2000-1000, Math.random()*3000-1500);
     }
    }
