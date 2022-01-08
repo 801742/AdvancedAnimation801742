@@ -69,7 +69,7 @@ Segment.prototype.repulsion = function(){
   let nearOrgOne = false;
   for(let i=0; i < orgOnes.length; i++){
     let d = JSVector.subGetNew(this.loc, orgOnes[i].loc).getMagnitude();
-    if(d < 120){
+    if(d < 130){
       this.acc = JSVector.subGetNew(this.loc, orgOnes[i].loc).setMagnitude(0.5);
       nearOrgOne = true;
     }
